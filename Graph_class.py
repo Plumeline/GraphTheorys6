@@ -141,27 +141,47 @@ class DirectedWeightedGraph :
 
     def floydWarshall(self):
 
-            # self.graph = {}
-            # self.nb_vertices = 0
-            # self.nb_edges = 0
-            #{[A] : { [B] : 4, [C] : 9}}
+        # self.graph = {}
+        # self.nb_vertices = 0
+        # self.nb_edges = 0
+        #{[A] : { [B] : 4, [C] : 9}}
 
-            graph_dict: Dict = self.graph.copy()
-            vertices = graph_dict.keys()
-            matrix_shortest_path_added_weights = []
-            matrix_intermediate_node = []
+        graph_dict: Dict = self.graph.copy()
+        
+        # matrix of the weights of the shortest path
+        L = [[math.inf for _ in range(self.nb_vertices)] for _ in range(self.nb_vertices)]
+        
+        # matrix of the path itself
+        P = [[None for _ in range(self.nb_vertices)] for _ in range(self.nb_vertices)]
+        
 
-            # Basically, create a matrix nb_vertices * nb_vertices
-            matrix_shortest_path_added_weights = [[math.inf for _ in range(self.nb_vertices)] for _ in range(self.nb_vertices)]
-            for (vertex, dict_edges) in graph_dict.items():
-                for key in dict_edges.keys():
-                    matrix_shortest_path_added_weights[vertex][key] = dict_edges[key]
+        for (vertex, dict_edges) in graph_dict.items():
+            for key in dict_edges.keys():
+                L[vertex][key] = dict_edges[key]
+                P[vertex][key] = vertex
 
-                matrix_shortest_path_added_weights[vertex][vertex] = 0 
-                
-            # FLOYD WARSHALL (L AND P MATRICES)
-            for intermediate_node_index in range(self.nb_vertices): 
-                pass
-            
+            L[vertex][vertex] = 0
+        
+        
+        # FLOYD WARSHALL (L AND P MATRICES)
+        # L is matrix_shortest_path_added_weights
+        # P is matrix_intermediate_node
 
-            print(matrix_shortest_path_added_weights)
+
+
+        for intermediate_node in range(self.nb_vertices):
+            for i in range(self.nb_vertices):
+                for j in range(self.nb_vertices):
+                    if L[i][intermediate_node] + L[intermediate_node][j] < L[i][j] :
+                        L[i][j] = L[i][intermediate_node] + L[intermediate_node][j]
+                        P[i][j] = P[intermediate_node][j]
+        
+
+
+        
+        return (L, P)
+    
+
+    def has_absorbant_cycle(self):
+        # Takes a graph with no isolated part and return 1 if it contains a negative cycle
+        pass
