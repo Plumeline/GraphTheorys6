@@ -25,6 +25,11 @@ class DirectedWeightedGraph :
             
             print("")
 
+    def floydWarshall(self):
+        dict = self.graph.copy()
+        
+
+
 
 vertices = [0, 1, 2]
 edges = [(0,1), (1,2)]
