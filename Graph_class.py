@@ -141,24 +141,24 @@ class DirectedWeightedGraph :
             print()
 
 
-  def floydWarshall(self):
+    def floydWarshall(self):
 
-          # self.graph = {}
-          # self.nb_vertices = 0
-          # self.nb_edges = 0
-          #{[A] : { [B] : 4, [C] : 9}}
+            # self.graph = {}
+            # self.nb_vertices = 0
+            # self.nb_edges = 0
+            #{[A] : { [B] : 4, [C] : 9}}
 
-          graph_dict: Dict = self.graph.copy()
-          vertices = graph_dict.keys()
-          matrix_shortest_path_added_weights = []
-          matrix_intermediate_node = []
+            graph_dict: Dict = self.graph.copy()
+            vertices = graph_dict.keys()
+            matrix_shortest_path_added_weights = []
+            matrix_intermediate_node = []
 
 
-          # Basically, create a matrix nb_vertices * nb_vertices
-          matrix_shortest_path_added_weights = [[math.inf for _ in range(self.nb_vertices)] for _ in range(self.nb_vertices)]
-          for (vertex, dict_edges) in graph_dict.items():
-              for key in dict_edges.keys():
-                  matrix_shortest_path_added_weights[vertex][key] = dict_edges[key]
+            # Basically, create a matrix nb_vertices * nb_vertices
+            matrix_shortest_path_added_weights = [[math.inf for _ in range(self.nb_vertices)] for _ in range(self.nb_vertices)]
+            for (vertex, dict_edges) in graph_dict.items():
+                for key in dict_edges.keys():
+                    matrix_shortest_path_added_weights[vertex][key] = dict_edges[key]
 
 
 
