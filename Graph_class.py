@@ -1,3 +1,7 @@
+from typing import Dict
+import math
+
+
 class DirectedWeightedGraph :
     def __init__(self):
 
@@ -99,6 +103,9 @@ class DirectedWeightedGraph :
         self.graph = graph
 
 
+        
+
+
     def display_graph(self):
         '''
         Displays the graph in the adjacency matrix format with vertical pipes and horizontal lines.
@@ -130,9 +137,33 @@ class DirectedWeightedGraph :
                     print(f"{str(weight):>{w}} |", end="")
                 else:
                     print(f"{'0':>{w}} |", end="")
-
             # Move to the next line
             print()
+
+
+  def floydWarshall(self):
+
+          # self.graph = {}
+          # self.nb_vertices = 0
+          # self.nb_edges = 0
+          #{[A] : { [B] : 4, [C] : 9}}
+
+          graph_dict: Dict = self.graph.copy()
+          vertices = graph_dict.keys()
+          matrix_shortest_path_added_weights = []
+          matrix_intermediate_node = []
+
+
+          # Basically, create a matrix nb_vertices * nb_vertices
+          matrix_shortest_path_added_weights = [[math.inf for _ in range(self.nb_vertices)] for _ in range(self.nb_vertices)]
+          for (vertex, dict_edges) in graph_dict.items():
+              for key in dict_edges.keys():
+                  matrix_shortest_path_added_weights[vertex][key] = dict_edges[key]
+
+
+
+
+
 
 '''
 vertices = [0, 1, 2]
