@@ -18,8 +18,8 @@ class DirectedWeightedGraph :
             print(self.vertices[j], end=" ")
             
             for x in range (self.nb_vertices):
-                if ((j, x) in self.edges):
-                    print(self.weights[(j,x)], end=" ")
+                if ((self.vertices[j], self.vertices[x]) in self.edges):
+                    print(self.weights[(self.vertices[j],self.vertices[x])], end=" ")
                 else:
                     print("0", end=" ")
             
@@ -28,7 +28,7 @@ class DirectedWeightedGraph :
 
 vertices = [0, 1, 2]
 edges = [(0,1), (1,2)]
-weights = {(0,1) : 2, (1,2) : 4}
+weights = {(0, 1) : 2, (1, 2) : 4}
 graph1 = DirectedWeightedGraph(vertices, edges, weights)  
 graph1.display_graph()
 
