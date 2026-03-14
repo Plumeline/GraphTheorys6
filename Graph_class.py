@@ -1,7 +1,6 @@
 from typing import Dict
 import math
 
-
 class DirectedWeightedGraph :
     def __init__(self):
 
@@ -103,8 +102,7 @@ class DirectedWeightedGraph :
         self.graph = graph
 
 
-        
-
+    
 
     def display_graph(self):
         '''
@@ -153,26 +151,17 @@ class DirectedWeightedGraph :
             matrix_shortest_path_added_weights = []
             matrix_intermediate_node = []
 
-
             # Basically, create a matrix nb_vertices * nb_vertices
             matrix_shortest_path_added_weights = [[math.inf for _ in range(self.nb_vertices)] for _ in range(self.nb_vertices)]
             for (vertex, dict_edges) in graph_dict.items():
                 for key in dict_edges.keys():
                     matrix_shortest_path_added_weights[vertex][key] = dict_edges[key]
 
+                matrix_shortest_path_added_weights[vertex][vertex] = 0 
+                
+            # FLOYD WARSHALL (L AND P MATRICES)
+            for intermediate_node_index in range(self.nb_vertices): 
+                pass
+            
 
-
-
-
-
-'''
-vertices = [0, 1, 2]
-edges = [(0,1), (1,2)]
-weights = {(0, 1) : 2, (1, 2) : 4}
-graph1 = DirectedWeightedGraph(vertices, edges, weights)  
-graph1.display_graph()
-'''
-
-graph1 = DirectedWeightedGraph()
-graph1.readFile("Graphs/graph8.txt")
-graph1.display_graph()
+            print(matrix_shortest_path_added_weights)
