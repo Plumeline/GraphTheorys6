@@ -7,6 +7,9 @@ class DirectedWeightedGraph :
         self.nb_vertices = len(self.vertices)
         self.nb_edges = len(self.edges)
 
+    #function to properly display the graph
+    #first row and first column are the name of the vertices in the graph
+    #The function adapts to the name of the vertices, whether it's numbers, letters, etc. 
     def display_graph(self):
         print("  ", end="")
         for i in range (self.nb_vertices):
