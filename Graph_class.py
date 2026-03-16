@@ -182,6 +182,9 @@ class DirectedWeightedGraph :
         return (L, P)
     
 
-    def has_absorbant_cycle(self):
-        # Takes a graph with no isolated part and return 1 if it contains a negative cycle
-        pass
+    def has_absorbant_cycle(self, L):
+        for i in range(self.nb_vertices):
+            if L[i][i] < 0:
+                return True
+        return False
+    
