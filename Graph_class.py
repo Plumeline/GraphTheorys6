@@ -102,39 +102,46 @@ class DirectedWeightedGraph :
         self.graph = graph
 
 
-    
-
     def display_graph(self):
         '''
         Displays the graph in the adjacency matrix format with vertical pipes and horizontal lines.
         '''
         vertices = list(self.graph.keys())
-        w = 8  # Width of each column box
+        w = 9  # Width of each column box
 
         # Print the header row with vertical pipes
-        print(f"{'':>{w}} |", end="")
+        print(f"{'':>{w}}|", end="")
         for v in vertices:
-            print(f"{str(v):>{w}} |", end="")
+            print(f"{'':>{(w+1)//2 - len(str(v))//2 - 1}}", end="")
+            print(str(v), end="")
+            print(f"{'':>{w - (w+1)//2 -len(str(v))//2}}|", end="")
         print()
 
         # Print a horizontal separator line
         total_columns = 1 + len(vertices)
         for _ in range(total_columns):
-            print("-" * (w + 1) + "+", end="")
+            print("-" * (w) + "+", end="")
         print()
 
         # Print each row with vertical pipes
         for row_vertex in vertices:
             # Print the row label
-            print(f"{str(row_vertex):>{w}} |", end="")
+            print(" " * (w-2), end="")
+            print(str(row_vertex), end="")
+            print(" |", end="")
 
             # Print the weights or 0
             for col_vertex in vertices:
                 if col_vertex in self.graph[row_vertex]:
                     weight = self.graph[row_vertex][col_vertex]
-                    print(f"{str(weight):>{w}} |", end="")
+                    print(f"{'':>{(w+1)//2 - len(str(weight))//2 - 1}}", end="")
+                    print(str(weight), end="")
+                    print(f"{'':>{w - (w+1)//2 -len(str(weight))//2}}|", end="")
+
                 else:
-                    print(f"{'0':>{w}} |", end="")
+                    print(f"{'':>{(w+1)//2 - 1}}", end="")
+                    print('0', end="")
+                    print(f"{'':>{w - (w+1)//2}}|", end="")
             # Move to the next line
             print()
 
@@ -162,12 +169,9 @@ class DirectedWeightedGraph :
 
             L[vertex][vertex] = 0
         
-        
         # FLOYD WARSHALL (L AND P MATRICES)
         # L is matrix_shortest_path_added_weights
         # P is matrix_intermediate_node
-
-
 
         for intermediate_node in range(self.nb_vertices):
             for i in range(self.nb_vertices):
@@ -175,9 +179,6 @@ class DirectedWeightedGraph :
                     if L[i][intermediate_node] + L[intermediate_node][j] < L[i][j] :
                         L[i][j] = L[i][intermediate_node] + L[intermediate_node][j]
                         P[i][j] = P[intermediate_node][j]
-        
-
-
         
         return (L, P)
     
