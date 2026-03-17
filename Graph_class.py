@@ -1,5 +1,6 @@
 from typing import Dict
 import math
+from copy import deepcopy 
 
 class DirectedWeightedGraph :
     def __init__(self):
@@ -134,14 +135,15 @@ class DirectedWeightedGraph :
             for col_vertex in vertices:
                 if col_vertex in self.graph[row_vertex]:
                     weight = self.graph[row_vertex][col_vertex]
-                    print(f"{'':>{(w+1)//2 - len(str(weight))//2 - 1}}", end="")
+                    size = len(str(weight))
+                    print(f"{'':>{(w-size)//2}}", end="")
                     print(str(weight), end="")
-                    print(f"{'':>{w - (w+1)//2 -len(str(weight))//2}}|", end="")
+                    print(f"{'':>{(w-size)//2 + (size+1)%2}}|", end="")
 
                 else:
-                    print(f"{'':>{(w+1)//2 - 1}}", end="")
-                    print('0', end="")
-                    print(f"{'':>{w - (w+1)//2}}|", end="")
+                    print(f"{'':>{(w-1)//2}}", end="")
+                    print('-', end="")
+                    print(f"{'':>{(w-1)//2}}|", end="")
             # Move to the next line
             print()
 
@@ -161,17 +163,24 @@ class DirectedWeightedGraph :
         # matrix of the path itself
         P = [[None for _ in range(self.nb_vertices)] for _ in range(self.nb_vertices)]
         
+        list_L = []
+        list_P = []
 
         for (vertex, dict_edges) in graph_dict.items():
+            
+            L[vertex][vertex] = 0
+            P[vertex][vertex] = vertex
+
             for key in dict_edges.keys():
                 L[vertex][key] = dict_edges[key]
                 P[vertex][key] = vertex
-
-            L[vertex][vertex] = 0
         
+        list_L.append(deepcopy(L))
+        list_P.append(deepcopy(P))
         # FLOYD WARSHALL (L AND P MATRICES)
         # L is matrix_shortest_path_added_weights
         # P is matrix_intermediate_node
+
 
         for intermediate_node in range(self.nb_vertices):
             for i in range(self.nb_vertices):
@@ -179,8 +188,10 @@ class DirectedWeightedGraph :
                     if L[i][intermediate_node] + L[intermediate_node][j] < L[i][j] :
                         L[i][j] = L[i][intermediate_node] + L[intermediate_node][j]
                         P[i][j] = P[intermediate_node][j]
+            list_L.append(deepcopy(L))
+            list_P.append(deepcopy(P))
         
-        return (L, P)
+        return (list_L, list_P)
     
 
     def has_absorbant_cycle(self, L):
@@ -189,3 +200,5 @@ class DirectedWeightedGraph :
                 return True
         return False
     
+
+
