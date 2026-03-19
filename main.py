@@ -93,6 +93,11 @@ def main():
                                 print("|")
                             print(" "*9 + "+" + "-"*(w*graph.nb_vertices) + "+" + " "*12 + "+" + "-"*(w*graph.nb_vertices) + "+")
                             print("\n")
+
+                            if (graph.has_absorbant_cycle(list_L[len(list_L)-1])):
+                                print(" This graph contains at least one absorbant cycle ! \n \n")
+                            else:
+                                print (" This graph contains no absorbant cycle. \n \n")
                 
 
 
