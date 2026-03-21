@@ -1,0 +1,78 @@
+Iteration 0 
+            0    1    2    3    4                  0    1    2    3    4  
+
+         +-------------------------+            +-------------------------+
+       0 |  0   1.0  2.0  1.0  inf |          0 |  0    0    0    0  None |
+       1 | inf   0   inf  inf  inf |          1 |None   1  None None None |
+ L :   2 | inf  inf   0  -2.0  1.0 |    P :   2 |None None   2    2    2  |
+       3 | inf  inf  inf   0   4.0 |          3 |None None None   3    3  |
+       4 | inf  3.0  inf  inf   0  |          4 |None   4  None None   4  |
+         +-------------------------+            +-------------------------+
+
+ This graph contains no absorbant cycle. 
+ 
+Iteration 1 
+            0    1    2    3    4                  0    1    2    3    4  
+
+         +-------------------------+            +-------------------------+
+       0 |  0   1.0  2.0  1.0  inf |          0 |  0    0    0    0  None |
+       1 | inf   0   inf  inf  inf |          1 |None   1  None None None |
+ L :   2 | inf  inf   0  -2.0  1.0 |    P :   2 |None None   2    2    2  |
+       3 | inf  inf  inf   0   4.0 |          3 |None None None   3    3  |
+       4 | inf  3.0  inf  inf   0  |          4 |None   4  None None   4  |
+         +-------------------------+            +-------------------------+
+
+ This graph contains no absorbant cycle. 
+ 
+Iteration 2 
+            0    1    2    3    4                  0    1    2    3    4  
+
+         +-------------------------+            +-------------------------+
+       0 |  0   1.0  2.0  1.0  inf |          0 |  0    0    0    0  None |
+       1 | inf   0   inf  inf  inf |          1 |None   1  None None None |
+ L :   2 | inf  inf   0  -2.0  1.0 |    P :   2 |None None   2    2    2  |
+       3 | inf  inf  inf   0   4.0 |          3 |None None None   3    3  |
+       4 | inf  3.0  inf  inf   0  |          4 |None   4  None None   4  |
+         +-------------------------+            +-------------------------+
+
+ This graph contains no absorbant cycle. 
+ 
+Iteration 3 
+            0    1    2    3    4                  0    1    2    3    4  
+
+         +-------------------------+            +-------------------------+
+       0 |  0   1.0  2.0  0.0  3.0 |          0 |  0    0    0    2    2  |
+       1 | inf   0   inf  inf  inf |          1 |None   1  None None None |
+ L :   2 | inf  inf   0  -2.0  1.0 |    P :   2 |None None   2    2    2  |
+       3 | inf  inf  inf   0   4.0 |          3 |None None None   3    3  |
+       4 | inf  3.0  inf  inf   0  |          4 |None   4  None None   4  |
+         +-------------------------+            +-------------------------+
+
+ This graph contains no absorbant cycle. 
+ 
+Iteration 4 
+            0    1    2    3    4                  0    1    2    3    4  
+
+         +-------------------------+            +-------------------------+
+       0 |  0   1.0  2.0  0.0  3.0 |          0 |  0    0    0    2    2  |
+       1 | inf   0   inf  inf  inf |          1 |None   1  None None None |
+ L :   2 | inf  inf   0  -2.0  1.0 |    P :   2 |None None   2    2    2  |
+       3 | inf  inf  inf   0   4.0 |          3 |None None None   3    3  |
+       4 | inf  3.0  inf  inf   0  |          4 |None   4  None None   4  |
+         +-------------------------+            +-------------------------+
+
+ This graph contains no absorbant cycle. 
+ 
+Iteration 5 
+            0    1    2    3    4                  0    1    2    3    4  
+
+         +-------------------------+            +-------------------------+
+       0 |  0   1.0  2.0  0.0  3.0 |          0 |  0    0    0    2    2  |
+       1 | inf   0   inf  inf  inf |          1 |None   1  None None None |
+ L :   2 | inf  4.0   0  -2.0  1.0 |    P :   2 |None   4    2    2    2  |
+       3 | inf  7.0  inf   0   4.0 |          3 |None   4  None   3    3  |
+       4 | inf  3.0  inf  inf   0  |          4 |None   4  None None   4  |
+         +-------------------------+            +-------------------------+
+
+ This graph contains no absorbant cycle. 
+ 
