@@ -100,7 +100,25 @@ def main():
                             print(" This graph contains at least one absorbant cycle ! \n \n")
                         else:
                             print (" This graph contains no absorbant cycle. \n \n")
-                
+                        
+                        if num_graph == 14:
+                            print("Correspondance table :")
+                            len_str = 30
+                            list_correspondance = [(0, "Kuala Lumpur (Malaysia)"), (1, "Penang (Malaysia)"), (2, "Ipoh (Malaysia)"), (3, "Johor Bahru (Malaysia)"), (4, "Singapore (Singapore)"),
+                                                    (5, "Melaka (Malaysia)"), (6, "Bangkok (Thailand)"), (7, "Hat Yai (Thailand)"), (8, "Kuantan (Malaysia)"), (9, "Kuala Terengganu (Malaysia)"),
+                                                    (10, "Kota Bharu (Malaysia)"), (11, "Alor Setar (Malaysia)"), (12, "Phuket (Thailand)"), (13, "Surat Thani (Thailand)"), (14, "Hua Hin (Thailand)")]
+                            print("_"*(13 + len_str))
+                            print("| Vertex : |" + " "*(((len_str-5))//2) + "Place" + " "*((len_str-5)//2) + " |")
+                            for corr in list_correspondance:
+                                print(
+                                    "|" + " " * ((11 - len(str(corr[0]))) // 2) + str(corr[0]) +
+                                    " " * (10 - len(str(corr[0])) - ((11 - len(str(corr[0]))) // 2)) + "|" +
+                                    " " * ((len_str - len(corr[1])) // 2) + corr[1] +
+                                    " " * ((len_str - len(corr[1]) + 1) // 2) + "|")
+                            print("_"*(13 + len_str))
+                                
+
+
 
 
 if __name__ == "__main__":
