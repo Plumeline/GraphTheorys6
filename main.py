@@ -2,7 +2,7 @@ from Graph_class import DirectedWeightedGraph
 
 
 
-k = 13 #Total number of graph of the form graphN.txt
+k = 14 #Total number of graph of the form graphN.txt
 
 
 def main():
@@ -47,18 +47,20 @@ def main():
                             print(f"Iteration {i}")
                             print()
                             print(f" "*10, end="")
-                            w = 5
+                            w = 5 #Must be odd
                             for v in range(graph.nb_vertices):
-                                print(f"{'':>{(w+1)//2 - len(str(v))//2 - 1}}", end="")
+                                size = len(str(v))
+                                print(f"{'':>{(w-size)//2}}", end="")
                                 print(str(v), end="")
-                                print(f"{'':>{w - (w+1)//2 -len(str(v))//2}}", end="")
+                                print(f"{'':>{(w-size)//2 + (size+1)%2}}", end="")
 
                             print(" "*14, end="")
 
                             for v in range(graph.nb_vertices):
-                                print(f"{'':>{(w+1)//2 - len(str(v))//2 - 1}}", end="")
+                                size = len(str(v))
+                                print(f"{'':>{(w-size)//2}}", end="")
                                 print(str(v), end="")
-                                print(f"{'':>{w - (w+1)//2 -len(str(v))//2}}", end="")
+                                print(f"{'':>{(w-size)//2 + (size+1)%2}}", end="")
                             print()
 
                             print(" "*9 + "+" + "-"*(w*graph.nb_vertices) + "+" + " "*12 + "+" + "-"*(w*graph.nb_vertices) + "+")
@@ -69,7 +71,7 @@ def main():
                                 else:
                                     print("    ", end="")
 
-                                print(f"{str(v):>{4}} |", end="")
+                                print(" "*(4-len(str(v))) + str(v) + " |", end="")
                                 for elem in range(graph.nb_vertices):
                                     weight = list_L[i][v][elem]
                                     size = len(str(weight))
@@ -83,7 +85,7 @@ def main():
                                 else:
                                     print("    ", end="")
                                 
-                                print(f"{str(v):>{4}} |", end="")
+                                print(" "*(4-len(str(v))) + str(v) + " |", end="")
                                 for elem in range(graph.nb_vertices):
                                     path = list_P[i][v][elem]
                                     size = len(str(path))
@@ -94,10 +96,10 @@ def main():
                             print(" "*9 + "+" + "-"*(w*graph.nb_vertices) + "+" + " "*12 + "+" + "-"*(w*graph.nb_vertices) + "+")
                             print("\n")
 
-                            if (graph.has_absorbant_cycle(list_L[len(list_L)-1])):
-                                print(" This graph contains at least one absorbant cycle ! \n \n")
-                            else:
-                                print (" This graph contains no absorbant cycle. \n \n")
+                        if (graph.has_absorbant_cycle(list_L[len(list_L)-1])):
+                            print(" This graph contains at least one absorbant cycle ! \n \n")
+                        else:
+                            print (" This graph contains no absorbant cycle. \n \n")
                 
 
 

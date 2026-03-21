@@ -113,9 +113,10 @@ class DirectedWeightedGraph :
         # Print the header row with vertical pipes
         print(f"{'':>{w}}|", end="")
         for v in vertices:
-            print(f"{'':>{(w+1)//2 - len(str(v))//2 - 1}}", end="")
+            size = len(str(v))
+            print(f"{'':>{(w-size)//2}}", end="")
             print(str(v), end="")
-            print(f"{'':>{w - (w+1)//2 -len(str(v))//2}}|", end="")
+            print(f"{'':>{(w-size)//2 + (size+1)%2}}|", end="")
         print()
 
         # Print a horizontal separator line
@@ -127,7 +128,7 @@ class DirectedWeightedGraph :
         # Print each row with vertical pipes
         for row_vertex in vertices:
             # Print the row label
-            print(" " * (w-2), end="")
+            print(" " * (w-1-len(str(row_vertex))), end="")
             print(str(row_vertex), end="")
             print(" |", end="")
 
