@@ -2,7 +2,7 @@ from Graph_class import DirectedWeightedGraph
 
 
 
-k = 13 #Total number of graph of the form graphN.txt
+k = 14 #Total number of graph of the form graphN.txt
 
 
 def main():
@@ -47,7 +47,7 @@ def main():
                             print(f"Iteration {i}")
                             print()
                             print(f" "*10, end="")
-                            w = 5
+                            w = 9
                             for v in range(graph.nb_vertices):
                                 print(f"{'':>{(w+1)//2 - len(str(v))//2 - 1}}", end="")
                                 print(str(v), end="")
