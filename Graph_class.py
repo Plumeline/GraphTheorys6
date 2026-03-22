@@ -11,11 +11,7 @@ class DirectedWeightedGraph :
 
     def readFile(self, file):
         '''
-        Reads a file and returns a tuple containing:
-        - the number of vertices
-        - the number of edges
-        - the graph represented as a nested dictionary { vertex1 : { vertex2 : weight, ... }, ... }
-        If the file is not in a valid format, returns None and prints an error message.
+        Reads a graph from a file and stores it in the graph attribute as an adjacency list
         '''
         with open(file, "r", encoding="utf-8") as f:
 
@@ -62,8 +58,7 @@ class DirectedWeightedGraph :
                     f"Incorrect file format for {file} : The actual number of edges does not correspond to supposed number of edges")
                 return None
 
-            # --- NEW STRUCTURE INITIALIZATION ---
-            # Initialize an empty dictionary for each vertex to handle disconnected nodes safely
+            # Initialize an empty dictionary for each vertex to handle disconnected nodes
             graph = {i: {} for i in range(nb_vertices)}
 
             for i in range(0, len(all_lines)):
@@ -89,13 +84,11 @@ class DirectedWeightedGraph :
                     print(f"Incorrect file format for {file} : in line {i + 2}, the second vertex does not exist")
                     return None
 
-                # --- UPDATED DUPLICATE CHECK ---
                 # Check if vertex2 is already a key in the inner dictionary of vertex1
                 if vertex2 in graph[vertex1]:
                     print(f"Incorrect file format for {file} : in line {i + 2}, the edge already exists")
                     return None
 
-                # --- UPDATED ASSIGNMENT ---
                 graph[vertex1][vertex2] = weight
 
         self.nb_vertices = nb_vertices
@@ -105,12 +98,12 @@ class DirectedWeightedGraph :
 
     def display_graph(self):
         '''
-        Displays the graph in the adjacency matrix format with vertical pipes and horizontal lines.
+        displays the graph in the adjacency matrix format with vertical pipes and horizontal lines
         '''
         vertices = list(self.graph.keys())
         w = 9  # Width of each column box
 
-        # Print the header row with vertical pipes
+        # print the header row with vertical pipes
         print(f"{'':>{w}}|", end="")
         for v in vertices:
             size = len(str(v))
@@ -119,20 +112,20 @@ class DirectedWeightedGraph :
             print(f"{'':>{(w-size)//2 + (size+1)%2}}|", end="")
         print()
 
-        # Print a horizontal separator line
+        # print a horizontal separator line
         total_columns = 1 + len(vertices)
         for _ in range(total_columns):
             print("-" * (w) + "+", end="")
         print()
 
-        # Print each row with vertical pipes
+        # print each row with vertical pipes
         for row_vertex in vertices:
             # Print the row label
             print(" " * (w-1-len(str(row_vertex))), end="")
             print(str(row_vertex), end="")
             print(" |", end="")
 
-            # Print the weights or 0
+            # print the weights or 0
             for col_vertex in vertices:
                 if col_vertex in self.graph[row_vertex]:
                     weight = self.graph[row_vertex][col_vertex]
@@ -145,7 +138,7 @@ class DirectedWeightedGraph :
                     print(f"{'':>{(w-1)//2}}", end="")
                     print('-', end="")
                     print(f"{'':>{(w-1)//2}}|", end="")
-            # Move to the next line
+            # move to the next line
             print()
 
 
