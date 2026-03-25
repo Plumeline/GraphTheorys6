@@ -41,59 +41,61 @@ def main():
 
                         list_L, list_P = graph.floydWarshall()
 
-
                         # Printing in a good-looking way the matrices L and P at each step
-                        for i in range(graph.nb_vertices + 1): # the number of iteration
+                        for i in range(graph.nb_vertices + 1):  # the number of iteration
                             print(f"Iteration {i}")
                             print()
-                            print(f" "*10, end="")
-                            w = 5 #Must be odd
-                            for v in range(graph.nb_vertices):
-                                size = len(str(v))
-                                print(f"{'':>{(w-size)//2}}", end="")
-                                print(str(v), end="")
-                                print(f"{'':>{(w-size)//2 + (size+1)%2}}", end="")
-
-                            print(" "*14, end="")
+                            print(f" " * 10, end="")
+                            w = 15  # <-- LA LARGEUR EST BIEN A 15 ICI
 
                             for v in range(graph.nb_vertices):
                                 size = len(str(v))
-                                print(f"{'':>{(w-size)//2}}", end="")
+                                print(f"{'':>{max(0, (w - size) // 2)}}", end="")
                                 print(str(v), end="")
-                                print(f"{'':>{(w-size)//2 + (size+1)%2}}", end="")
+                                print(f"{'':>{max(0, (w - size) // 2 + (size + 1) % 2)}}", end="")
+
+                            print(" " * 14, end="")
+
+                            for v in range(graph.nb_vertices):
+                                size = len(str(v))
+                                print(f"{'':>{max(0, (w - size) // 2)}}", end="")
+                                print(str(v), end="")
+                                print(f"{'':>{max(0, (w - size) // 2 + (size + 1) % 2)}}", end="")
                             print()
 
-                            print(" "*9 + "+" + "-"*(w*graph.nb_vertices) + "+" + " "*12 + "+" + "-"*(w*graph.nb_vertices) + "+")
+                            print(" " * 9 + "+" + "-" * (w * graph.nb_vertices) + "+" + " " * 12 + "+" + "-" * (
+                                        w * graph.nb_vertices) + "+")
 
                             for v in range(graph.nb_vertices):
-                                if v+1 == (graph.nb_vertices + 1)//2:
+                                if v + 1 == (graph.nb_vertices + 1) // 2:
                                     print(" L :", end="")
                                 else:
                                     print("    ", end="")
 
-                                print(" "*(4-len(str(v))) + str(v) + " |", end="")
+                                print(" " * (4 - len(str(v))) + str(v) + " |", end="")
                                 for elem in range(graph.nb_vertices):
                                     weight = list_L[i][v][elem]
                                     size = len(str(weight))
-                                    print(f"{'':>{(w-size)//2}}", end="")
+                                    print(f"{'':>{max(0, (w - size) // 2)}}", end="")
                                     print(str(weight), end="")
-                                    print(f"{'':>{(w-size)//2 + (size+1)%2}}", end="")
-                                
+                                    print(f"{'':>{max(0, (w - size) // 2 + (size + 1) % 2)}}", end="")
+
                                 print("|   ", end="")
-                                if v+1 == (graph.nb_vertices + 1)//2:
+                                if v + 1 == (graph.nb_vertices + 1) // 2:
                                     print(" P :", end="")
                                 else:
                                     print("    ", end="")
-                                
-                                print(" "*(4-len(str(v))) + str(v) + " |", end="")
+
+                                print(" " * (4 - len(str(v))) + str(v) + " |", end="")
                                 for elem in range(graph.nb_vertices):
                                     path = list_P[i][v][elem]
                                     size = len(str(path))
-                                    print(f"{'':>{(w-size)//2}}", end="")
+                                    print(f"{'':>{max(0, (w - size) // 2)}}", end="")  # <-- LE MAX(0, ...) EST BIEN LA
                                     print(str(path), end="")
-                                    print(f"{'':>{(w-size)//2 + (size+1)%2}}", end="")
+                                    print(f"{'':>{max(0, (w - size) // 2 + (size + 1) % 2)}}", end="")
                                 print("|")
-                            print(" "*9 + "+" + "-"*(w*graph.nb_vertices) + "+" + " "*12 + "+" + "-"*(w*graph.nb_vertices) + "+")
+                            print(" " * 9 + "+" + "-" * (w * graph.nb_vertices) + "+" + " " * 12 + "+" + "-" * (
+                                        w * graph.nb_vertices) + "+")
                             print("\n")
 
                         if (graph.has_absorbant_cycle(list_L[len(list_L)-1])):
@@ -143,7 +145,7 @@ if __name__ == "__main__":
                                 g.write(f"Iteration {i} \n")
 
                                 g.write(f" "*10)
-                                w = 5
+                                w = 15
                                 for v in range(graph.nb_vertices):
                                     g.write(f"{'':>{(w+1)//2 - len(str(v))//2 - 1}}")
                                     g.write(str(v))

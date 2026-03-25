@@ -1,6 +1,6 @@
 from typing import Dict
 import math
-from copy import deepcopy 
+from copy import deepcopy
 
 class DirectedWeightedGraph :
     def __init__(self):
@@ -150,43 +150,52 @@ class DirectedWeightedGraph :
         #{[A] : { [B] : 4, [C] : 9}}
 
         graph_dict: Dict = self.graph.copy()
-        
+
         # matrix of the weights of the shortest path
         L = [[math.inf for _ in range(self.nb_vertices)] for _ in range(self.nb_vertices)]
-        
+
         # matrix of the path itself
-        P = [[None for _ in range(self.nb_vertices)] for _ in range(self.nb_vertices)]
-        
+        P = [[[] for _ in range(self.nb_vertices)] for _ in range(self.nb_vertices)]
+
         list_L = []
         list_P = []
 
         for (vertex, dict_edges) in graph_dict.items():
-            
+
             L[vertex][vertex] = 0
-            P[vertex][vertex] = vertex
+            P[vertex][vertex] = [vertex]
 
             for key in dict_edges.keys():
                 L[vertex][key] = dict_edges[key]
-                P[vertex][key] = vertex
-        
+                P[vertex][key] = [vertex]
+
         list_L.append(deepcopy(L))
         list_P.append(deepcopy(P))
         # FLOYD WARSHALL (L AND P MATRICES)
         # L is matrix_shortest_path_added_weights
         # P is matrix_intermediate_node
 
-
         for intermediate_node in range(self.nb_vertices):
             for i in range(self.nb_vertices):
                 for j in range(self.nb_vertices):
-                    if L[i][intermediate_node] + L[intermediate_node][j] < L[i][j] :
-                        L[i][j] = L[i][intermediate_node] + L[intermediate_node][j]
-                        P[i][j] = P[intermediate_node][j]
+
+                    new_distance = L[i][intermediate_node] + L[intermediate_node][j]
+
+                    if new_distance < L[i][j]:
+                        L[i][j] = new_distance
+                        P[i][j] = deepcopy(P[intermediate_node][j])
+
+
+                    elif new_distance == L[i][j] and L[i][j] != math.inf and intermediate_node != i and intermediate_node != j:
+                        for pred in P[intermediate_node][j]:
+                            if pred not in P[i][j]:
+                                P[i][j].append(pred)
+
             list_L.append(deepcopy(L))
             list_P.append(deepcopy(P))
-        
+
         return (list_L, list_P)
-    
+
 
     def has_absorbant_cycle(self, L):
         for i in range(self.nb_vertices):
@@ -194,6 +203,7 @@ class DirectedWeightedGraph :
                 return True
         return False
 
+    """
     def display_all_path(self, P):
         for i in range(self.nb_vertices):
             for j in range(self.nb_vertices):
@@ -208,6 +218,39 @@ class DirectedWeightedGraph :
                     print(f"Shortest path from {i} to {j} : " + str(path))
                 else:
                     print(f"No path from {i} to {j}")
-    
+    """
+
+    def display_all_path(self, P):
+        for i in range(self.nb_vertices):
+            for j in range(self.nb_vertices):
+
+                # S'il y a au moins un prédécesseur (donc un chemin existe)
+                if len(P[i][j]) > 0:
+
+                    # Au lieu d'une simple liste 'path', on crée une liste de chemins à explorer
+                    # On initialise en partant de la fin (j), comme tu le faisais.
+                    paths_to_explore = [[j]]
+
+                    while len(paths_to_explore) > 0:
+                        # On prend le chemin en cours de construction
+                        current_path = paths_to_explore.pop()
+                        # Le nœud actuel est le dernier qu'on a ajouté au chemin
+                        current_node = current_path[-1]
+
+                        # Si on est remonté jusqu'au point de départ
+                        if current_node == i:
+                            # On inverse le chemin, exactement comme dans ton code d'origine !
+                            current_path.reverse()
+                            print(f"Shortest path from {i} to {j} : " + str(current_path))
+
+                        # Sinon, on continue à remonter
+                        else:
+                            # Au lieu de faire current_node = P[i][current_node],
+                            # on ajoute chaque prédécesseur possible à notre liste de chemins à explorer
+                            for pred in P[i][current_node]:
+                                paths_to_explore.append(current_path + [pred])
+                else:
+                    print(f"No path from {i} to {j}")
+
 
 
