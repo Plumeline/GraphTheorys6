@@ -100,6 +100,8 @@ def main():
                             print(" This graph contains at least one absorbant cycle ! \n \n")
                         else:
                             print (" This graph contains no absorbant cycle. \n \n")
+
+                        graph.display_all_path(list_P[-1])
                         
                         if num_graph == 14:
                             print("Correspondance table :")

@@ -193,6 +193,21 @@ class DirectedWeightedGraph :
             if L[i][i] < 0:
                 return True
         return False
+
+    def display_all_path(self, P):
+        for i in range(self.nb_vertices):
+            for j in range(self.nb_vertices):
+                if P[i][j] is not None:
+                    path = []
+                    current_node = j
+                    while current_node != i:
+                        path.append(current_node)
+                        current_node = P[i][current_node]
+                    path.append(i)
+                    path.reverse()
+                    print(f"Shortest path from {i} to {j} : " + str(path))
+                else:
+                    print(f"No path from {i} to {j}")
     
 
 
