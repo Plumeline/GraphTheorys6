@@ -223,34 +223,16 @@ class DirectedWeightedGraph :
     def display_all_path(self, P):
         for i in range(self.nb_vertices):
             for j in range(self.nb_vertices):
-
-                # S'il y a au moins un prédécesseur (donc un chemin existe)
                 if len(P[i][j]) > 0:
-
-                    # Au lieu d'une simple liste 'path', on crée une liste de chemins à explorer
-                    # On initialise en partant de la fin (j), comme tu le faisais.
                     paths_to_explore = [[j]]
-
                     while len(paths_to_explore) > 0:
-                        # On prend le chemin en cours de construction
                         current_path = paths_to_explore.pop()
-                        # Le nœud actuel est le dernier qu'on a ajouté au chemin
                         current_node = current_path[-1]
-
-                        # Si on est remonté jusqu'au point de départ
                         if current_node == i:
-                            # On inverse le chemin, exactement comme dans ton code d'origine !
                             current_path.reverse()
                             print(f"Shortest path from {i} to {j} : " + str(current_path))
-
-                        # Sinon, on continue à remonter
                         else:
-                            # Au lieu de faire current_node = P[i][current_node],
-                            # on ajoute chaque prédécesseur possible à notre liste de chemins à explorer
                             for pred in P[i][current_node]:
                                 paths_to_explore.append(current_path + [pred])
                 else:
                     print(f"No path from {i} to {j}")
-
-
-
